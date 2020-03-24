@@ -1,0 +1,700 @@
+
+ws2313.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         0000033e  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000002  00800060  0000033e  000003d2  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000071  00800062  00800062  000003d4  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  000003d4  2**0
+                  CONTENTS, READONLY
+  4 .debug_aranges 000000a0  00000000  00000000  00000404  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   000008bb  00000000  00000000  000004a4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 0000033f  00000000  00000000  00000d5f  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   000003b4  00000000  00000000  0000109e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000124  00000000  00000000  00001454  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    000002cc  00000000  00000000  00001578  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    000005b7  00000000  00000000  00001844  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000080  00000000  00000000  00001dfb  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	14 c0       	rjmp	.+40     	; 0x2a <__ctors_end>
+   2:	2c c0       	rjmp	.+88     	; 0x5c <__bad_interrupt>
+   4:	2b c0       	rjmp	.+86     	; 0x5c <__bad_interrupt>
+   6:	2a c0       	rjmp	.+84     	; 0x5c <__bad_interrupt>
+   8:	29 c0       	rjmp	.+82     	; 0x5c <__bad_interrupt>
+   a:	62 c0       	rjmp	.+196    	; 0xd0 <__vector_5>
+   c:	27 c0       	rjmp	.+78     	; 0x5c <__bad_interrupt>
+   e:	26 c0       	rjmp	.+76     	; 0x5c <__bad_interrupt>
+  10:	25 c0       	rjmp	.+74     	; 0x5c <__bad_interrupt>
+  12:	24 c0       	rjmp	.+72     	; 0x5c <__bad_interrupt>
+  14:	23 c0       	rjmp	.+70     	; 0x5c <__bad_interrupt>
+  16:	22 c0       	rjmp	.+68     	; 0x5c <__bad_interrupt>
+  18:	21 c0       	rjmp	.+66     	; 0x5c <__bad_interrupt>
+  1a:	20 c0       	rjmp	.+64     	; 0x5c <__bad_interrupt>
+  1c:	1f c0       	rjmp	.+62     	; 0x5c <__bad_interrupt>
+  1e:	1e c0       	rjmp	.+60     	; 0x5c <__bad_interrupt>
+  20:	1d c0       	rjmp	.+58     	; 0x5c <__bad_interrupt>
+  22:	1c c0       	rjmp	.+56     	; 0x5c <__bad_interrupt>
+  24:	1b c0       	rjmp	.+54     	; 0x5c <__bad_interrupt>
+  26:	1a c0       	rjmp	.+52     	; 0x5c <__bad_interrupt>
+  28:	19 c0       	rjmp	.+50     	; 0x5c <__bad_interrupt>
+
+0000002a <__ctors_end>:
+  2a:	11 24       	eor	r1, r1
+  2c:	1f be       	out	0x3f, r1	; 63
+  2e:	cf ed       	ldi	r28, 0xDF	; 223
+  30:	cd bf       	out	0x3d, r28	; 61
+
+00000032 <__do_copy_data>:
+  32:	10 e0       	ldi	r17, 0x00	; 0
+  34:	a0 e6       	ldi	r26, 0x60	; 96
+  36:	b0 e0       	ldi	r27, 0x00	; 0
+  38:	ee e3       	ldi	r30, 0x3E	; 62
+  3a:	f3 e0       	ldi	r31, 0x03	; 3
+  3c:	02 c0       	rjmp	.+4      	; 0x42 <__SREG__+0x3>
+  3e:	05 90       	lpm	r0, Z+
+  40:	0d 92       	st	X+, r0
+  42:	a2 36       	cpi	r26, 0x62	; 98
+  44:	b1 07       	cpc	r27, r17
+  46:	d9 f7       	brne	.-10     	; 0x3e <__SP_L__+0x1>
+
+00000048 <__do_clear_bss>:
+  48:	20 e0       	ldi	r18, 0x00	; 0
+  4a:	a2 e6       	ldi	r26, 0x62	; 98
+  4c:	b0 e0       	ldi	r27, 0x00	; 0
+  4e:	01 c0       	rjmp	.+2      	; 0x52 <.do_clear_bss_start>
+
+00000050 <.do_clear_bss_loop>:
+  50:	1d 92       	st	X+, r1
+
+00000052 <.do_clear_bss_start>:
+  52:	a3 3d       	cpi	r26, 0xD3	; 211
+  54:	b2 07       	cpc	r27, r18
+  56:	e1 f7       	brne	.-8      	; 0x50 <.do_clear_bss_loop>
+  58:	14 d1       	rcall	.+552    	; 0x282 <main>
+  5a:	6f c1       	rjmp	.+734    	; 0x33a <_exit>
+
+0000005c <__bad_interrupt>:
+  5c:	d1 cf       	rjmp	.-94     	; 0x0 <__vectors>
+
+0000005e <ws2812_setleds>:
+  cli();  
+
+  while (datlen--) {
+    curbyte=*data++;
+    
+    asm volatile(
+  5e:	9b 01       	movw	r18, r22
+  60:	22 0f       	add	r18, r18
+  62:	33 1f       	adc	r19, r19
+  maskhi |=        ws2812_PORTREG;
+  
+  sreg_prev=SREG;
+  cli();  
+
+  while (datlen--) {
+  64:	62 0f       	add	r22, r18
+  66:	73 1f       	adc	r23, r19
+  68:	ba 9a       	sbi	0x17, 2	; 23
+    :	"=&d" (ctr)
+    :	"r" (curbyte), "I" (_SFR_IO_ADDR(ws2812_PORTREG)), "r" (maskhi), "r" (masklo)
+    );
+  }
+  
+  SREG=sreg_prev;
+  6a:	38 b3       	in	r19, 0x18	; 24
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  6c:	3b 7f       	andi	r19, 0xFB	; 251
+  6e:	48 b3       	in	r20, 0x18	; 24
+  70:	44 60       	ori	r20, 0x04	; 4
+  72:	af b7       	in	r26, 0x3f	; 63
+  74:	f8 94       	cli
+  76:	61 15       	cp	r22, r1
+  78:	71 05       	cpc	r23, r1
+  maskhi |=        ws2812_PORTREG;
+  
+  sreg_prev=SREG;
+  cli();  
+
+  while (datlen--) {
+  7a:	09 f4       	brne	.+2      	; 0x7e <ws2812_setleds+0x20>
+  7c:	21 c0       	rjmp	.+66     	; 0xc0 <loop56+0x38>
+  7e:	fc 01       	movw	r30, r24
+  80:	86 0f       	add	r24, r22
+  82:	97 1f       	adc	r25, r23
+    curbyte=*data++;
+  84:	21 91       	ld	r18, Z+
+    
+    asm volatile(
+  86:	58 e0       	ldi	r21, 0x08	; 8
+
+00000088 <loop56>:
+  88:	48 bb       	out	0x18, r20	; 24
+  8a:	27 ff       	sbrs	r18, 7
+  8c:	38 bb       	out	0x18, r19	; 24
+  8e:	22 0f       	add	r18, r18
+  90:	00 00       	nop
+  92:	00 c0       	rjmp	.+0      	; 0x94 <loop56+0xc>
+  94:	38 bb       	out	0x18, r19	; 24
+  96:	00 00       	nop
+  98:	00 c0       	rjmp	.+0      	; 0x9a <loop56+0x12>
+  9a:	00 c0       	rjmp	.+0      	; 0x9c <loop56+0x14>
+  9c:	00 c0       	rjmp	.+0      	; 0x9e <loop56+0x16>
+  9e:	00 c0       	rjmp	.+0      	; 0xa0 <loop56+0x18>
+  a0:	00 c0       	rjmp	.+0      	; 0xa2 <loop56+0x1a>
+  a2:	00 c0       	rjmp	.+0      	; 0xa4 <loop56+0x1c>
+  a4:	00 c0       	rjmp	.+0      	; 0xa6 <loop56+0x1e>
+  a6:	00 c0       	rjmp	.+0      	; 0xa8 <loop56+0x20>
+  a8:	00 c0       	rjmp	.+0      	; 0xaa <loop56+0x22>
+  aa:	00 c0       	rjmp	.+0      	; 0xac <loop56+0x24>
+  ac:	00 c0       	rjmp	.+0      	; 0xae <loop56+0x26>
+  ae:	00 c0       	rjmp	.+0      	; 0xb0 <loop56+0x28>
+  b0:	00 c0       	rjmp	.+0      	; 0xb2 <loop56+0x2a>
+  b2:	00 c0       	rjmp	.+0      	; 0xb4 <loop56+0x2c>
+  b4:	00 c0       	rjmp	.+0      	; 0xb6 <loop56+0x2e>
+  b6:	5a 95       	dec	r21
+  b8:	39 f7       	brne	.-50     	; 0x88 <loop56>
+  maskhi |=        ws2812_PORTREG;
+  
+  sreg_prev=SREG;
+  cli();  
+
+  while (datlen--) {
+  ba:	e8 17       	cp	r30, r24
+  bc:	f9 07       	cpc	r31, r25
+  be:	11 f7       	brne	.-60     	; 0x84 <ws2812_setleds+0x26>
+    :	"=&d" (ctr)
+    :	"r" (curbyte), "I" (_SFR_IO_ADDR(ws2812_PORTREG)), "r" (maskhi), "r" (masklo)
+    );
+  }
+  
+  SREG=sreg_prev;
+  c0:	af bf       	out	0x3f, r26	; 63
+  c2:	87 e5       	ldi	r24, 0x57	; 87
+  c4:	92 e0       	ldi	r25, 0x02	; 2
+  c6:	01 97       	sbiw	r24, 0x01	; 1
+  c8:	f1 f7       	brne	.-4      	; 0xc6 <loop56+0x3e>
+  ca:	00 c0       	rjmp	.+0      	; 0xcc <loop56+0x44>
+  cc:	00 00       	nop
+  ce:	08 95       	ret
+
+000000d0 <__vector_5>:
+}tButt;
+volatile tButt  mButt_1 = {0,!ACT_BUTT_LEV,0,0};    // Объявляем структуру mButt_1 для нашей кнопки и иним её.
+/******************************************************************/
+/* Timer 1 Overflov Interrupt             */
+/******************************************************************/
+ISR(TIMER1_OVF_vect){
+  d0:	1f 92       	push	r1
+  d2:	0f 92       	push	r0
+  d4:	0f b6       	in	r0, 0x3f	; 63
+  d6:	0f 92       	push	r0
+  d8:	11 24       	eor	r1, r1
+  da:	2f 93       	push	r18
+  dc:	8f 93       	push	r24
+  de:	9f 93       	push	r25
+	
+	//PORT_LED_4 ^=(1<<PIN_LED_4);
+	
+	cnt_timer++;
+  e0:	80 91 63 00 	lds	r24, 0x0063
+  e4:	90 91 64 00 	lds	r25, 0x0064
+  e8:	01 96       	adiw	r24, 0x01	; 1
+  ea:	90 93 64 00 	sts	0x0064, r25
+  ee:	80 93 63 00 	sts	0x0063, r24
+	if(cnt_timer==10000) //  Счетчик переполнений 
+  f2:	80 91 63 00 	lds	r24, 0x0063
+  f6:	90 91 64 00 	lds	r25, 0x0064
+  fa:	80 31       	cpi	r24, 0x10	; 16
+  fc:	97 42       	sbci	r25, 0x27	; 39
+  fe:	69 f4       	brne	.+26     	; 0x11a <__stack+0x3b>
+	{
+		cnt_minutes++; // Счетчик примерно минут
+ 100:	80 91 d1 00 	lds	r24, 0x00D1
+ 104:	90 91 d2 00 	lds	r25, 0x00D2
+ 108:	01 96       	adiw	r24, 0x01	; 1
+ 10a:	90 93 d2 00 	sts	0x00D2, r25
+ 10e:	80 93 d1 00 	sts	0x00D1, r24
+		//PORT_LED_4 ^=(1<<PIN_LED_4);
+		cnt_timer = 0;
+ 112:	10 92 64 00 	sts	0x0064, r1
+ 116:	10 92 63 00 	sts	0x0063, r1
+	}
+	//===================== Опрос кнопок ===========================================
+	static unsigned char cnt_ms_butt=20;    // Счётчик для формирования периода в 20 мс.
+	TCNT1 -= 4000;          // Перезапускаем таймер на 1 мс.
+ 11a:	8c b5       	in	r24, 0x2c	; 44
+ 11c:	9d b5       	in	r25, 0x2d	; 45
+ 11e:	80 5a       	subi	r24, 0xA0	; 160
+ 120:	9f 40       	sbci	r25, 0x0F	; 15
+ 122:	9d bd       	out	0x2d, r25	; 45
+ 124:	8c bd       	out	0x2c, r24	; 44
+	//----------------------//
+	if(!--cnt_ms_butt){     // Формируем 20-ти миллисек. периоды
+ 126:	80 91 60 00 	lds	r24, 0x0060
+ 12a:	81 50       	subi	r24, 0x01	; 1
+ 12c:	19 f0       	breq	.+6      	; 0x134 <__stack+0x55>
+ 12e:	80 93 60 00 	sts	0x0060, r24
+ 132:	2c c0       	rjmp	.+88     	; 0x18c <__stack+0xad>
+		cnt_ms_butt=20;
+ 134:	84 e1       	ldi	r24, 0x14	; 20
+ 136:	80 93 60 00 	sts	0x0060, r24
+		mButt_1.cur = (PORT_BUTT_1&(1<<PIN_BUTT_1))!=0;                 // Считываем текущее значение вывода.
+ 13a:	96 b3       	in	r25, 0x16	; 22
+ 13c:	80 91 61 00 	lds	r24, 0x0061
+ 140:	90 fb       	bst	r25, 0
+ 142:	80 f9       	bld	r24, 0
+ 144:	80 93 61 00 	sts	0x0061, r24
+		// Дальше работаем с этим битом, т.к. порт может измениться в любой момент.
+		if((mButt_1.cur==ACT_BUTT_LEV) && (mButt_1.prev!=ACT_BUTT_LEV)) // Если текущее значение - "нажата" и предыдущее - "не нажата"
+ 148:	80 91 61 00 	lds	r24, 0x0061
+ 14c:	80 fd       	sbrc	r24, 0
+ 14e:	09 c0       	rjmp	.+18     	; 0x162 <__stack+0x83>
+ 150:	80 91 61 00 	lds	r24, 0x0061
+ 154:	81 ff       	sbrs	r24, 1
+ 156:	05 c0       	rjmp	.+10     	; 0x162 <__stack+0x83>
+		mButt_1.down = 1;                                                   // Устанавливаем флаг down
+ 158:	80 91 61 00 	lds	r24, 0x0061
+ 15c:	84 60       	ori	r24, 0x04	; 4
+ 15e:	80 93 61 00 	sts	0x0061, r24
+		if((mButt_1.cur!=ACT_BUTT_LEV) && (mButt_1.prev==ACT_BUTT_LEV)) // Если текущее значение - "не нажата" и предыдущее - "нажата"
+ 162:	80 91 61 00 	lds	r24, 0x0061
+ 166:	80 ff       	sbrs	r24, 0
+ 168:	09 c0       	rjmp	.+18     	; 0x17c <__stack+0x9d>
+ 16a:	80 91 61 00 	lds	r24, 0x0061
+ 16e:	81 fd       	sbrc	r24, 1
+ 170:	05 c0       	rjmp	.+10     	; 0x17c <__stack+0x9d>
+		mButt_1.up = 1;                                                     // Устанавливаем флаг up
+ 172:	80 91 61 00 	lds	r24, 0x0061
+ 176:	88 60       	ori	r24, 0x08	; 8
+ 178:	80 93 61 00 	sts	0x0061, r24
+		mButt_1.prev=mButt_1.cur;                                       // Сохраняем текущее значение. Оно для следующего входа будет предыдущим
+ 17c:	90 91 61 00 	lds	r25, 0x0061
+ 180:	80 91 61 00 	lds	r24, 0x0061
+ 184:	90 fb       	bst	r25, 0
+ 186:	81 f9       	bld	r24, 1
+ 188:	80 93 61 00 	sts	0x0061, r24
+	}
+	//----------------------//
+}
+ 18c:	9f 91       	pop	r25
+ 18e:	8f 91       	pop	r24
+ 190:	2f 91       	pop	r18
+ 192:	0f 90       	pop	r0
+ 194:	0f be       	out	0x3f, r0	; 63
+ 196:	0f 90       	pop	r0
+ 198:	1f 90       	pop	r1
+ 19a:	18 95       	reti
+
+0000019c <TimerInit>:
+/************************ Конец опроса и прерывания ******************************************/
+void TimerInit()
+{
+	 TCCR1B = _BV(CS10);	// Таймер работает на полной частоте системы
+ 19c:	81 e0       	ldi	r24, 0x01	; 1
+ 19e:	8e bd       	out	0x2e, r24	; 46
+	 TIMSK |= _BV(TOIE1) ;	// Включить прерывания
+ 1a0:	89 b7       	in	r24, 0x39	; 57
+ 1a2:	80 68       	ori	r24, 0x80	; 128
+ 1a4:	89 bf       	out	0x39, r24	; 57
+	 TCNT1 = 0;
+ 1a6:	1d bc       	out	0x2d, r1	; 45
+ 1a8:	1c bc       	out	0x2c, r1	; 44
+ 1aa:	08 95       	ret
+
+000001ac <PortInit>:
+}
+void PortInit()
+{
+	 PORT_LED_1  &=~(1<<PIN_LED_1);
+ 1ac:	c1 98       	cbi	0x18, 1	; 24
+	 DDR_LED_1   |=(1<<PIN_LED_1);
+ 1ae:	b9 9a       	sbi	0x17, 1	; 23
+	 PORT_LED_2  &=~(1<<PIN_LED_2);
+ 1b0:	c3 98       	cbi	0x18, 3	; 24
+	 DDR_LED_2 |=(1<<PIN_LED_2);
+ 1b2:	bb 9a       	sbi	0x17, 3	; 23
+	 PORT_LED_4  &=~(1<<PIN_LED_4);
+ 1b4:	c4 98       	cbi	0x18, 4	; 24
+	 DDR_LED_4 |=(1<<PIN_LED_4);
+ 1b6:	bc 9a       	sbi	0x17, 4	; 23
+	 DDRB &=~(1<<PIN_BUTT_1);
+ 1b8:	b8 98       	cbi	0x17, 0	; 23
+	 PORTB |= (1<<PIN_BUTT_1); // Кнопка "MODE"
+ 1ba:	c0 9a       	sbi	0x18, 0	; 24
+	 PORT_LED_4 &=~(1<<PIN_LED_4);
+ 1bc:	c4 98       	cbi	0x18, 4	; 24
+ 1be:	08 95       	ret
+
+000001c0 <Indication4_WS2812>:
+}
+
+//*************************** ФУНКЦИИ ПОДГОТОВКИ ВЫВОДА НА ЛЕНТУ *************************
+void Indication4_WS2812()// Вывод розового оттенка
+{
+ 1c0:	e7 e6       	ldi	r30, 0x67	; 103
+ 1c2:	f0 e0       	ldi	r31, 0x00	; 0
+ 1c4:	83 ed       	ldi	r24, 0xD3	; 211
+ 1c6:	90 e0       	ldi	r25, 0x00	; 0
+		for(int i=0; i<MAX_PIXEL ; i++ )
+	{
+		led[i].r=255;led[i].g=0;led[i].b=255;    // Write pink to array
+ 1c8:	2f ef       	ldi	r18, 0xFF	; 255
+ 1ca:	df 01       	movw	r26, r30
+ 1cc:	11 97       	sbiw	r26, 0x01	; 1
+ 1ce:	2c 93       	st	X, r18
+ 1d0:	11 97       	sbiw	r26, 0x01	; 1
+ 1d2:	1c 92       	st	X, r1
+ 1d4:	20 83       	st	Z, r18
+ 1d6:	33 96       	adiw	r30, 0x03	; 3
+}
+
+//*************************** ФУНКЦИИ ПОДГОТОВКИ ВЫВОДА НА ЛЕНТУ *************************
+void Indication4_WS2812()// Вывод розового оттенка
+{
+		for(int i=0; i<MAX_PIXEL ; i++ )
+ 1d8:	e8 17       	cp	r30, r24
+ 1da:	f9 07       	cpc	r31, r25
+ 1dc:	b1 f7       	brne	.-20     	; 0x1ca <Indication4_WS2812+0xa>
+	{
+		led[i].r=255;led[i].g=0;led[i].b=255;    // Write pink to array
+		// ws2812_setleds(led,NUM_PIXEL);
+		// _delay_ms(500);
+	}
+}
+ 1de:	08 95       	ret
+
+000001e0 <Indication3_WS2812>:
+
+void Indication3_WS2812() // Вывод синего оттенка
+{
+ 1e0:	e7 e6       	ldi	r30, 0x67	; 103
+ 1e2:	f0 e0       	ldi	r31, 0x00	; 0
+ 1e4:	83 ed       	ldi	r24, 0xD3	; 211
+ 1e6:	90 e0       	ldi	r25, 0x00	; 0
+	for(int i=0; i<MAX_PIXEL ; i++ )
+	{
+		led[i].r=0;led[i].g=0;led[i].b=255;    // Write pink to array
+ 1e8:	2f ef       	ldi	r18, 0xFF	; 255
+ 1ea:	df 01       	movw	r26, r30
+ 1ec:	11 97       	sbiw	r26, 0x01	; 1
+ 1ee:	1c 92       	st	X, r1
+ 1f0:	11 97       	sbiw	r26, 0x01	; 1
+ 1f2:	1c 92       	st	X, r1
+ 1f4:	20 83       	st	Z, r18
+ 1f6:	33 96       	adiw	r30, 0x03	; 3
+	}
+}
+
+void Indication3_WS2812() // Вывод синего оттенка
+{
+	for(int i=0; i<MAX_PIXEL ; i++ )
+ 1f8:	e8 17       	cp	r30, r24
+ 1fa:	f9 07       	cpc	r31, r25
+ 1fc:	b1 f7       	brne	.-20     	; 0x1ea <Indication3_WS2812+0xa>
+	{
+		led[i].r=0;led[i].g=0;led[i].b=255;    // Write pink to array
+		// ws2812_setleds(led,NUM_PIXEL);
+		// _delay_ms(500);
+	}
+}
+ 1fe:	08 95       	ret
+
+00000200 <Indication2_WS2812>:
+
+void Indication2_WS2812() // Вывод белого оттенка 
+{
+ 200:	e7 e6       	ldi	r30, 0x67	; 103
+ 202:	f0 e0       	ldi	r31, 0x00	; 0
+ 204:	83 ed       	ldi	r24, 0xD3	; 211
+ 206:	90 e0       	ldi	r25, 0x00	; 0
+	for(int i=0; i<MAX_PIXEL ; i++ )
+	{
+		led[i].r=255;led[i].g=255;led[i].b=255;    // Write pink to array
+ 208:	2f ef       	ldi	r18, 0xFF	; 255
+ 20a:	df 01       	movw	r26, r30
+ 20c:	11 97       	sbiw	r26, 0x01	; 1
+ 20e:	2c 93       	st	X, r18
+ 210:	11 97       	sbiw	r26, 0x01	; 1
+ 212:	2c 93       	st	X, r18
+ 214:	20 83       	st	Z, r18
+ 216:	33 96       	adiw	r30, 0x03	; 3
+	}
+}
+
+void Indication2_WS2812() // Вывод белого оттенка 
+{
+	for(int i=0; i<MAX_PIXEL ; i++ )
+ 218:	e8 17       	cp	r30, r24
+ 21a:	f9 07       	cpc	r31, r25
+ 21c:	b1 f7       	brne	.-20     	; 0x20a <Indication2_WS2812+0xa>
+	{
+		led[i].r=255;led[i].g=255;led[i].b=255;    // Write pink to array
+		// ws2812_setleds(led,NUM_PIXEL);
+		// _delay_ms(500);
+	}
+}
+ 21e:	08 95       	ret
+
+00000220 <Indication_WS2812>:
+
+
+void Indication_WS2812() // Вывод розово-синего оттенка
+{
+ 220:	83 ed       	ldi	r24, 0xD3	; 211
+ 222:	90 e0       	ldi	r25, 0x00	; 0
+ 224:	e7 e6       	ldi	r30, 0x67	; 103
+ 226:	f0 e0       	ldi	r31, 0x00	; 0
+	 for(int i=0; i<MAX_PIXEL ; i++ )
+	 {
+		 led[i].r=255;led[i].g=00;led[i].b=255;    // Write pink to array
+ 228:	2f ef       	ldi	r18, 0xFF	; 255
+ 22a:	df 01       	movw	r26, r30
+ 22c:	11 97       	sbiw	r26, 0x01	; 1
+ 22e:	2c 93       	st	X, r18
+ 230:	11 97       	sbiw	r26, 0x01	; 1
+ 232:	1c 92       	st	X, r1
+ 234:	20 83       	st	Z, r18
+ 236:	33 96       	adiw	r30, 0x03	; 3
+}
+
+
+void Indication_WS2812() // Вывод розово-синего оттенка
+{
+	 for(int i=0; i<MAX_PIXEL ; i++ )
+ 238:	e8 17       	cp	r30, r24
+ 23a:	f9 07       	cpc	r31, r25
+ 23c:	b1 f7       	brne	.-20     	; 0x22a <Indication_WS2812+0xa>
+ 23e:	e7 e6       	ldi	r30, 0x67	; 103
+ 240:	f0 e0       	ldi	r31, 0x00	; 0
+		 // ws2812_setleds(led,NUM_PIXEL);
+		 // _delay_ms(500);
+	 }
+	 for(int i=0; i<MAX_PIXEL; i+=2 )
+	 {
+		 led[i].r=0;led[i].g=00;led[i].b=255;    // Write blue to array
+ 242:	2f ef       	ldi	r18, 0xFF	; 255
+ 244:	df 01       	movw	r26, r30
+ 246:	11 97       	sbiw	r26, 0x01	; 1
+ 248:	1c 92       	st	X, r1
+ 24a:	11 97       	sbiw	r26, 0x01	; 1
+ 24c:	1c 92       	st	X, r1
+ 24e:	20 83       	st	Z, r18
+ 250:	36 96       	adiw	r30, 0x06	; 6
+	 {
+		 led[i].r=255;led[i].g=00;led[i].b=255;    // Write pink to array
+		 // ws2812_setleds(led,NUM_PIXEL);
+		 // _delay_ms(500);
+	 }
+	 for(int i=0; i<MAX_PIXEL; i+=2 )
+ 252:	e8 17       	cp	r30, r24
+ 254:	f9 07       	cpc	r31, r25
+ 256:	b1 f7       	brne	.-20     	; 0x244 <Indication_WS2812+0x24>
+	 {
+		 led[i].r=0;led[i].g=00;led[i].b=255;    // Write blue to array
+		 // ws2812_setleds(led,NUM_PIXEL);
+	 }
+}
+ 258:	08 95       	ret
+
+0000025a <Reset_Leds>:
+void Reset_Leds() // Очистить ленту
+{
+ 25a:	e7 e6       	ldi	r30, 0x67	; 103
+ 25c:	f0 e0       	ldi	r31, 0x00	; 0
+ 25e:	83 ed       	ldi	r24, 0xD3	; 211
+ 260:	90 e0       	ldi	r25, 0x00	; 0
+ 262:	df 01       	movw	r26, r30
+ 264:	11 97       	sbiw	r26, 0x01	; 1
+	for(int p=0; p<MAX_PIXEL ; p++ )
+	{
+		led[p].r=0;led[p].g=00;led[p].b=0;    // Write empty to array
+ 266:	1c 92       	st	X, r1
+ 268:	11 97       	sbiw	r26, 0x01	; 1
+ 26a:	1c 92       	st	X, r1
+ 26c:	10 82       	st	Z, r1
+ 26e:	33 96       	adiw	r30, 0x03	; 3
+		 // ws2812_setleds(led,NUM_PIXEL);
+	 }
+}
+void Reset_Leds() // Очистить ленту
+{
+	for(int p=0; p<MAX_PIXEL ; p++ )
+ 270:	e8 17       	cp	r30, r24
+ 272:	f9 07       	cpc	r31, r25
+ 274:	b1 f7       	brne	.-20     	; 0x262 <Reset_Leds+0x8>
+	{
+		led[p].r=0;led[p].g=00;led[p].b=0;    // Write empty to array
+		// ws2812_setleds(led,NUM_PIXEL);
+		// _delay_ms(500);
+	}
+	 ws2812_setleds(led,MAX_PIXEL); // Загружаем на ленту массив
+ 276:	64 e2       	ldi	r22, 0x24	; 36
+ 278:	70 e0       	ldi	r23, 0x00	; 0
+ 27a:	85 e6       	ldi	r24, 0x65	; 101
+ 27c:	90 e0       	ldi	r25, 0x00	; 0
+ 27e:	ef de       	rcall	.-546    	; 0x5e <ws2812_setleds>
+ 280:	08 95       	ret
+
+00000282 <main>:
+}
+//================================ Конец Функций =============================
+int main(void)
+{
+	 TimerInit();
+ 282:	8c df       	rcall	.-232    	; 0x19c <TimerInit>
+	 PortInit();
+ 284:	93 df       	rcall	.-218    	; 0x1ac <PortInit>
+	 mode = 1; // Включаемся
+ 286:	81 e0       	ldi	r24, 0x01	; 1
+ 288:	80 93 62 00 	sts	0x0062, r24
+	 sei();
+ 28c:	78 94       	sei
+ //============================= Главный Цикл ===============================  
+    while(1)
+    {
+       
+	  if(mButt_1.down){   // Если кнопка была  нажата
+ 28e:	80 91 61 00 	lds	r24, 0x0061
+ 292:	82 ff       	sbrs	r24, 2
+ 294:	0a c0       	rjmp	.+20     	; 0x2aa <main+0x28>
+		  mButt_1.down=0;  // Сбрасываем флаг
+ 296:	80 91 61 00 	lds	r24, 0x0061
+ 29a:	8b 7f       	andi	r24, 0xFB	; 251
+ 29c:	80 93 61 00 	sts	0x0061, r24
+		 // PORT_LED_2 ^=(1<<PIN_LED_2);    // Инвертируем светодиод №2
+		  mode ++; // Задаем режимы по кругу
+ 2a0:	80 91 62 00 	lds	r24, 0x0062
+ 2a4:	8f 5f       	subi	r24, 0xFF	; 255
+ 2a6:	80 93 62 00 	sts	0x0062, r24
+	  }
+	//========================== РЕЖИМЫ РАБОТЫ =======================  
+	 if(mode == 1)
+ 2aa:	80 91 62 00 	lds	r24, 0x0062
+ 2ae:	81 30       	cpi	r24, 0x01	; 1
+ 2b0:	19 f4       	brne	.+6      	; 0x2b8 <main+0x36>
+	 {
+		  Reset_Leds();
+ 2b2:	d3 df       	rcall	.-90     	; 0x25a <Reset_Leds>
+		// PORT_LED_1 &=~(1<<PIN_LED_1);
+		 PORT_LED_1 |=(1<<PIN_LED_1);
+ 2b4:	c1 9a       	sbi	0x18, 1	; 24
+		 PORT_LED_2 &=~(1<<PIN_LED_2);	// Переключаем светодиоды
+ 2b6:	c3 98       	cbi	0x18, 3	; 24
+	 }
+	 if(mode == 2)
+ 2b8:	80 91 62 00 	lds	r24, 0x0062
+ 2bc:	82 30       	cpi	r24, 0x02	; 2
+ 2be:	39 f4       	brne	.+14     	; 0x2ce <main+0x4c>
+	 {
+		  Indication_WS2812();
+ 2c0:	af df       	rcall	.-162    	; 0x220 <Indication_WS2812>
+		//  mode = 0;
+		//  PORT_LED_1 |=(1<<PIN_LED_1);
+		  PORT_LED_1 &=~(1<<PIN_LED_1);	// Переключаем светодиоды
+ 2c2:	c1 98       	cbi	0x18, 1	; 24
+		  PORT_LED_2 |=(1<<PIN_LED_2);
+ 2c4:	c3 9a       	sbi	0x18, 3	; 24
+		  //PORT_LED_4 &=~(1<<PIN_LED_4);
+			cnt_timer = 0;	// Перезапускаем таймер    
+ 2c6:	10 92 64 00 	sts	0x0064, r1
+ 2ca:	10 92 63 00 	sts	0x0063, r1
+	 }
+	  if(mode == 3)
+ 2ce:	80 91 62 00 	lds	r24, 0x0062
+ 2d2:	83 30       	cpi	r24, 0x03	; 3
+ 2d4:	29 f4       	brne	.+10     	; 0x2e0 <main+0x5e>
+	  {
+		 // mode = 0;
+		  Indication2_WS2812();
+ 2d6:	94 df       	rcall	.-216    	; 0x200 <Indication2_WS2812>
+		   cnt_timer = 0;	// Перезапускаем таймер
+ 2d8:	10 92 64 00 	sts	0x0064, r1
+ 2dc:	10 92 63 00 	sts	0x0063, r1
+	  }
+	  
+	   if(mode == 4)
+ 2e0:	80 91 62 00 	lds	r24, 0x0062
+ 2e4:	84 30       	cpi	r24, 0x04	; 4
+ 2e6:	29 f4       	brne	.+10     	; 0x2f2 <main+0x70>
+	   {
+		  // mode = 0;
+		   Indication3_WS2812();
+ 2e8:	7b df       	rcall	.-266    	; 0x1e0 <Indication3_WS2812>
+		    cnt_timer = 0;	// Перезапускаем таймер
+ 2ea:	10 92 64 00 	sts	0x0064, r1
+ 2ee:	10 92 63 00 	sts	0x0063, r1
+	   }
+		 if(mode == 5)
+ 2f2:	80 91 62 00 	lds	r24, 0x0062
+ 2f6:	85 30       	cpi	r24, 0x05	; 5
+ 2f8:	39 f4       	brne	.+14     	; 0x308 <main+0x86>
+		 {
+			 mode = 0;
+ 2fa:	10 92 62 00 	sts	0x0062, r1
+			 Indication4_WS2812();
+ 2fe:	60 df       	rcall	.-320    	; 0x1c0 <Indication4_WS2812>
+			  cnt_timer = 0;	// Перезапускаем таймер
+ 300:	10 92 64 00 	sts	0x0064, r1
+ 304:	10 92 63 00 	sts	0x0063, r1
+		//  PORT_LED_4 |=(1<<PIN_LED_4);
+		//  _delay_ms(200);
+		//  PORT_LED_4 &=~(1<<PIN_LED_4);
+		//  cnt_minutes++;
+		//  cnt_timer = 0;
+		 if(cnt_minutes == 1500) // Время вышло гасим ленту
+ 308:	80 91 d1 00 	lds	r24, 0x00D1
+ 30c:	90 91 d2 00 	lds	r25, 0x00D2
+ 310:	8c 3d       	cpi	r24, 0xDC	; 220
+ 312:	95 40       	sbci	r25, 0x05	; 5
+ 314:	61 f4       	brne	.+24     	; 0x32e <main+0xac>
+		 {
+			 cnt_minutes = 0;
+ 316:	10 92 d2 00 	sts	0x00D2, r1
+ 31a:	10 92 d1 00 	sts	0x00D1, r1
+			 cnt_timer = 0;	// Перезапускаем таймер
+ 31e:	10 92 64 00 	sts	0x0064, r1
+ 322:	10 92 63 00 	sts	0x0063, r1
+			  Reset_Leds();
+ 326:	99 df       	rcall	.-206    	; 0x25a <Reset_Leds>
+			 PORT_LED_1 |=(1<<PIN_LED_1);
+ 328:	c1 9a       	sbi	0x18, 1	; 24
+			 mode = 0;
+ 32a:	10 92 62 00 	sts	0x0062, r1
+		 }
+		// cli();
+		 ws2812_setleds(led,MAX_PIXEL); // Загружаем на ленту массив
+ 32e:	64 e2       	ldi	r22, 0x24	; 36
+ 330:	70 e0       	ldi	r23, 0x00	; 0
+ 332:	85 e6       	ldi	r24, 0x65	; 101
+ 334:	90 e0       	ldi	r25, 0x00	; 0
+ 336:	93 de       	rcall	.-730    	; 0x5e <ws2812_setleds>
+		// sei();
+	  
+        } // END LOOP
+ 338:	aa cf       	rjmp	.-172    	; 0x28e <main+0xc>
+
+0000033a <_exit>:
+ 33a:	f8 94       	cli
+
+0000033c <__stop_program>:
+ 33c:	ff cf       	rjmp	.-2      	; 0x33c <__stop_program>
